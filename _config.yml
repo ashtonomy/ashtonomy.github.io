@@ -1,3 +1,9 @@
+### TO RUN LOCALLY ###
+
+repository: ashtonomy/ashtonomy.github.io
+
+### DEFAULTS ###
+
 layout: sidebar
 style: light
 
@@ -17,7 +23,7 @@ defaults:
       layout: "post"
 
 projects:
-  sort_by: pushed
+  sort_by: stars
   # sort_by options:
   #   - pushed
   #   - stars
@@ -28,14 +34,14 @@ projects:
     projects:
     # - repo-name
 
-# social_media:
+social_media:
   # behance: your_username
   # dribbble: your_username
   # facebook: your_username
   # hackerrank: your_username
   # instagram: your_username
   # keybase: your_username
-  # linkedin: your_username
+  linkedin: ashtonwilliamson
   # mastodon: your_username
   # medium: your_username
   # stackoverflow: your_user_id
@@ -50,8 +56,6 @@ topics:
   - name: CSS
     web_url: https://github.com/topics/css
     image_url: https://raw.githubusercontent.com/github/explore/6c6508f34230f0ac0d49e847a326429eefbfc030/topics/css/css.png
-
-  - name: Web design
 
   - name: Sass
     web_url: https://github.com/topics/sass
