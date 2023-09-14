@@ -11,32 +11,37 @@ redirect_from:
 
 Education
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* B.S. in Computer Science, Clemson University, 2023
+* M.S. in Computer Science, Clemson University, Expected 2024
 
-Work experience
+Experience
 ======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* June 2023 - Present: Undergraduate Research Assistant
+  * Assigning ICD codes to medical notes  in MIMIC with NLP++
+  * Clemson University
+  * Advisor: Dr. Amy Apon 
+  * DuPont Award for Best Undergraduate Project
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+* July 2022 - May 2023: Undergraduate Research Assistant
+  * Extracting information from clinical text with NLP++
+  * Clemson University
+  * Advisor: Dr. Amy Apon
+  * DuPont Award for Best Undergraduate Project
+
+* September 2022 - June 2023: Research Intern
+  * Giant Oak, Inc.
+  * Investigating knowledge distillation for long-context transformer models and its impact named-entity recognition
   
-Skills
+<!-- Skills
 ======
 * Skill 1
 * Skill 2
   * Sub-skill 2.1
   * Sub-skill 2.2
   * Sub-skill 2.3
-* Skill 3
+* Skill 3 -->
 
-Publications
+<!-- Publications
 ======
   <ul>{% for post in site.publications %}
     {% include archive-single-cv.html %}
@@ -56,4 +61,4 @@ Teaching
   
 Service and leadership
 ======
-* Currently signed in to 43 different slack teams
+* Currently signed in to 43 different slack teams -->
