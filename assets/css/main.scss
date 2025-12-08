@@ -2,40 +2,122 @@
 ---
 
 /*
- *    Minimal Mistakes Jekyll Theme
+ * This file controls what is imported from /_sass
  *
- *  - Michael Rose
- *  - mademistakes.com
- *  - https://twitter.com/mmistakes
- *
-*/
+ * Note that the files are processed in the order they are imported, so they are partly
+   sorted by the dependencies. Also, the first two lines of the file are required by Jekyll.
+ */
 
-@import "vendor/breakpoint/breakpoint"; // media query mixins
-@import "variables";
-@import "mixins";
-@import "vendor/susy/susy";
+@import
+    "vendor/breakpoint/breakpoint",
 
-@import "reset";
-@import "base";
+    "themes",
+    "theme/{{ site.site_theme | default: 'default' | append: '_light' }}",
+    "theme/{{ site.site_theme | default: 'default' | append: '_dark' }}",
 
-@import "utilities";
-@import "animations";
-@import "tables";
-@import "buttons";
-@import "notices";
-@import "masthead";
-@import "navigation";
-@import "footer";
-@import "syntax";
+    "include/mixins",
+    "vendor/susy/susy",
 
-@import "forms";
+    "layout/reset",
+    "layout/base",
 
-@import "page";
-@import "archive";
-@import "sidebar";
+    "include/utilities",
+    "layout/tables",
+    "layout/buttons",
+    "layout/notices",
+    "layout/masthead",
+    "layout/navigation",
+    "layout/footer",
+    "syntax",
 
-@import "vendor/font-awesome/fontawesome";
-@import "vendor/font-awesome/solid";
-@import "vendor/font-awesome/brands";
-@import "vendor/magnific-popup/magnific-popup";
-@import "print";
+    "layout/forms",
+
+    "layout/page",
+    "layout/archive",
+    "layout/sidebar",
+    "layout/json_cv",
+
+    "vendor/font-awesome/fontawesome",
+    "vendor/font-awesome/solid",
+    "vendor/font-awesome/brands"
+;
+/* ===============================
+   GLOBAL FONT OVERRIDES
+   =============================== */
+
+/* Body text → Inter */
+html, body {
+  font-family: "Cardo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+}
+/* Headings → Fraunces */
+h1, h2, h3, h4, h5, h6,
+.page__title,     /* page titles */
+.site-title {     /* top-left site title */
+  font-family: "Cardo", Georgia, serif !important;
+  font-optical-sizing: auto;
+}
+
+/* ===============================
+   HEADER / NAVIGATION
+   =============================== */
+
+/* The entire masthead (top bar) */
+.masthead,
+.masthead .site-title,
+.masthead .site-nav,
+.masthead__menu-item {
+  font-family: "Cardo", Georgia, serif !important;
+}
+
+/* Sidebar: ONLY text-y bits */
+.sidebar,
+.sidebar .author__content,
+.sidebar .author__urls-wrapper,
+.sidebar .author__urls,
+.sidebar .author__urls a,
+.sidebar .nav__items a {
+  font-family: "Cardo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif !important;
+}
+
+/* ===============================
+   Vanta Background Layer
+   =============================== */
+
+#vanta-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;         /* behind all content */
+  pointer-events: none; /* so it doesn't block clicks */
+}
+
+/* Remove solid background from the whole page */
+html,
+body {
+  // background: transparent !important;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.masthead * {
+  background: transparent;
+}
+
+/* Make the top masthead bar see-through (or semi-see-through) */
+.masthead {
+  background-color: rgba(255, 255, 255, 0.6);  /* white, 60% opaque */
+  backdrop-filter: blur(6px);                  
+}
+
+
+/* Footer also semi-transparent */
+.page__footer {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Main content on a “card” so text stays readable */
+.page,
+.page__inner-wrap,
+.page__content {
+  background-color: rgba(255, 255, 255, 0.1);
+}
