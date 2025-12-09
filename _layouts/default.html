@@ -6,8 +6,6 @@ layout: compress
 
 <!doctype html>
 <html lang="{{ site.locale | slice: 0,2 }}" class="no-js"{% if site.site_theme == "dark" %} data-theme="dark"{% endif %}>
-  
-  <div id="vanta-bg"></div>  <!-- Vanta background container -->
 
   <head>
     {% include head.html %}
@@ -15,6 +13,8 @@ layout: compress
   </head>
 
   <body>
+
+    <div id="vanta-bg"></div>  <!-- Vanta background container -->
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}
