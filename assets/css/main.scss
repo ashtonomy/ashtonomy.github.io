@@ -135,8 +135,6 @@ html:not([data-theme="dark"]) .page__content {
 html[data-theme="dark"],
 html[data-theme="dark"] body {
   background: transparent;
-  // background-color: rgba(5, 8, 20, 0.2);
-  // color: #f5f5f7;
 }
 
 /* Top masthead: darker & more solid than body */
@@ -154,6 +152,5 @@ html[data-theme="dark"] .page__footer {
 html[data-theme="dark"] .page,
 html[data-theme="dark"] .page__inner-wrap,
 html[data-theme="dark"] .page__content {
-  // background-color: rgba(5, 8, 20, 0.5);
   background: transparent;
 }
