@@ -81,43 +81,79 @@ h1, h2, h3, h4, h5, h6,
     Helvetica, Arial, sans-serif !important;
 }
 
-/* ===============================
-   Vanta Background Layer
-   =============================== */
+/* ===================================
+   VANTA BACKGROUND 
+   =================================== */
+
 
 #vanta-bg {
   position: fixed;
   inset: 0;
-  z-index: -1;         /* behind all content */
+  z-index: -1;          /* behind all content */
   pointer-events: none; /* so it doesn't block clicks */
 }
 
-/* Remove solid background from the whole page */
-html,
-body {
-  // background: transparent !important;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
+/* Make sure child elements in the masthead don’t paint over it */
 .masthead * {
   background: transparent;
 }
 
-/* Make the top masthead bar see-through (or semi-see-through) */
-.masthead {
-  background-color: rgba(255, 255, 255, 0.6);  /* white, 60% opaque */
-  backdrop-filter: blur(6px);                  
+/* ===================================
+   LIGHT THEME (default)
+   Applies when data-theme is NOT "dark"
+   =================================== */
+
+html:not([data-theme="dark"]),
+html:not([data-theme="dark"]) body {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #111;
 }
 
+/* Top masthead: light translucent bar */
+html:not([data-theme="dark"]) .masthead {
+  background-color: rgba(255, 255, 255, 0.6);  /* white, 60% opaque */
+  backdrop-filter: blur(6px);
+}
 
-/* Footer also semi-transparent */
-.page__footer {
+/* Footer: light translucent */
+html:not([data-theme="dark"]) .page__footer {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-/* Main content on a “card” so text stays readable */
-.page,
-.page__inner-wrap,
-.page__content {
+/* Main content “card” for readability */
+html:not([data-theme="dark"]) .page,
+html:not([data-theme="dark"]) .page__inner-wrap,
+html:not([data-theme="dark"]) .page__content {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===================================
+   DARK THEME
+   Applies when <html data-theme="dark">
+   =================================== */
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background: transparent;
+  // background-color: rgba(5, 8, 20, 0.2);
+  // color: #f5f5f7;
+}
+
+/* Top masthead: darker & more solid than body */
+html[data-theme="dark"] .masthead {
+  background-color: rgba(5, 8, 20, 0.25);  /* deep navy, 85% opaque */
+  backdrop-filter: blur(6px);
+}
+
+/* Footer: dark translucent */
+html[data-theme="dark"] .page__footer {
+  background-color: rgba(5, 8, 20, 0.25);
+}
+
+/* Main content card: dark translucent background */
+html[data-theme="dark"] .page,
+html[data-theme="dark"] .page__inner-wrap,
+html[data-theme="dark"] .page__content {
+  // background-color: rgba(5, 8, 20, 0.5);
+  background: transparent;
 }
