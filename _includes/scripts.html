@@ -59,33 +59,37 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       /* 3) Denser near center, sparser at edges (XZ plane) */
-      if (!effect._densityWarped) {
-        let maxR = 0;
+      if (!effect._densityBaseSaved) {
         effect.points.forEach(p => {
-          const r = Math.hypot(p.position.x, p.position.z);
-          p._r0 = r;
-          if (r > maxR) maxR = r;
+          // Use Vanta's ox/oz if present, otherwise current position
+          p._baseX = (typeof p.ox === 'number') ? p.ox : p.position.x;
+          p._baseZ = (typeof p.oz === 'number') ? p.oz : p.position.z;
         });
-
-        if (maxR > 0) {
-          effect.points.forEach(p => {
-            const r0 = p._r0;
-            if (!r0) return;
-            const rNorm   = r0 / maxR;              /* 0 center → 1 edge */
-            const newNorm = Math.pow(rNorm, falloff);
-            const newR    = maxR * newNorm;
-            const s       = newR / r0;
-
-            p.position.x *= s;
-            p.position.z *= s;
-            if (p.ox !== undefined) p.ox *= s;
-            if (p.oz !== undefined) p.oz *= s;
-          });
-        }
-
-        effect._densityWarped = true;  // <--- mark as done
+        effect._densityBaseSaved = true;
       }
-      
+
+      let maxR = 0;
+      effect.points.forEach(p => {
+        const r = Math.hypot(p._baseX, p._baseZ);
+        if (r > maxR) maxR = r;
+      });
+
+      if (maxR > 0) {
+        effect.points.forEach(p => {
+          const r0 = Math.hypot(p._baseX, p._baseZ);
+          if (!r0) return;
+
+          const rNorm   = r0 / maxR;           // 0 center → 1 edge
+          const newNorm = Math.pow(rNorm, falloff);
+          const newR    = maxR * newNorm;
+          const s       = newR / r0;
+
+          // Position is always recomputed from base, so no accumulation
+          p.position.x = p._baseX * s;
+          p.position.z = p._baseZ * s;
+        });
+      }
+
       /* 4) Make all line colors match node color */
       if (effect.linesMesh.geometry?.attributes?.color) {
         const col = new THREE.Color(effect.options.color);
