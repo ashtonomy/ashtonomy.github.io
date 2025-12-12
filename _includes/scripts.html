@@ -59,29 +59,33 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       /* 3) Denser near center, sparser at edges (XZ plane) */
-      let maxR = 0;
-      effect.points.forEach(p => {
-        const r = Math.hypot(p.position.x, p.position.z);
-        p._r0 = r;
-        if (r > maxR) maxR = r;
-      });
-
-      if (maxR > 0) {
+      if (!effect._densityWarped) {
+        let maxR = 0;
         effect.points.forEach(p => {
-          const r0 = p._r0;
-          if (!r0) return;
-          const rNorm   = r0 / maxR;              /* 0 center → 1 edge */
-          const newNorm = Math.pow(rNorm, falloff);
-          const newR    = maxR * newNorm;
-          const s       = newR / r0;
-
-          p.position.x *= s;
-          p.position.z *= s;
-          if (p.ox !== undefined) p.ox *= s;
-          if (p.oz !== undefined) p.oz *= s;
+          const r = Math.hypot(p.position.x, p.position.z);
+          p._r0 = r;
+          if (r > maxR) maxR = r;
         });
-      }
 
+        if (maxR > 0) {
+          effect.points.forEach(p => {
+            const r0 = p._r0;
+            if (!r0) return;
+            const rNorm   = r0 / maxR;              /* 0 center → 1 edge */
+            const newNorm = Math.pow(rNorm, falloff);
+            const newR    = maxR * newNorm;
+            const s       = newR / r0;
+
+            p.position.x *= s;
+            p.position.z *= s;
+            if (p.ox !== undefined) p.ox *= s;
+            if (p.oz !== undefined) p.oz *= s;
+          });
+        }
+
+        effect._densityWarped = true;  // <--- mark as done
+      }
+      
       /* 4) Make all line colors match node color */
       if (effect.linesMesh.geometry?.attributes?.color) {
         const col = new THREE.Color(effect.options.color);
