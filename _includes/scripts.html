@@ -79,12 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const r0 = Math.hypot(p._baseX, p._baseZ);
           if (!r0) return;
 
-          const rNorm   = r0 / maxR;           // 0 center → 1 edge
+          const rNorm   = r0 / maxR;  
           const newNorm = Math.pow(rNorm, falloff);
           const newR    = maxR * newNorm;
           const s       = newR / r0;
 
-          // Position is always recomputed from base, so no accumulation
           p.position.x = p._baseX * s;
           p.position.z = p._baseZ * s;
         });
