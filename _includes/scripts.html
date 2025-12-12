@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
       /* 3) Denser near center, sparser at edges (XZ plane) */
       if (!effect._densityBaseSaved) {
         effect.points.forEach(p => {
-          // Use Vanta's ox/oz if present, otherwise current position
           p._baseX = (typeof p.ox === 'number') ? p.ox : p.position.x;
           p._baseZ = (typeof p.oz === 'number') ? p.oz : p.position.z;
         });
