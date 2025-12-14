@@ -152,3 +152,87 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
+<script>(() => {
+  const TYPING_SPEED = 150;
+  const START_DELAY = 1400; 
+
+  function resetCaretAnimation(el) {
+    el.classList.remove("is-typing");
+    void el.offsetHeight;
+    el.classList.add("is-typing");
+  }
+
+  function typeTitle(el, { force = false } = {}) {
+    if (force) {
+      delete el.dataset.typed;
+      delete el.dataset.typing;
+      delete el.dataset.delaying;
+    }
+
+    if (!force && (el.dataset.delaying === "true" || el.dataset.typing === "true" || el.dataset.typed === "true")) {
+      return;
+    }
+
+    const textToType = el.getAttribute("data-text") ?? el.textContent;
+    if (!textToType) return;
+
+    if (el._typingTimer) clearTimeout(el._typingTimer);
+
+    el.dataset.typing = "true";
+    el.dataset.delaying = "true";
+    el.textContent = "";
+
+    resetCaretAnimation(el);
+
+    let i = 0;
+
+    const tick = () => {
+      delete el.dataset.delaying;
+
+      if (i < textToType.length) {
+        el.textContent += textToType.charAt(i++);
+        el._typingTimer = setTimeout(tick, TYPING_SPEED);
+      } else {
+        clearTimeout(el._typingTimer);
+        el.dataset.typed = "true";
+        delete el.dataset.typing;
+      }
+    };
+
+    el._typingTimer = setTimeout(tick, START_DELAY);
+  }
+
+  function initializeTypewriter(root = document, opts = {}) {
+    root.querySelectorAll(".page__title").forEach(el => typeTitle(el, opts));
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initializeTypewriter(document, { force: true });
+
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        for (const node of m.addedNodes) {
+          if (!(node instanceof Element)) continue;
+
+          if (node.matches?.(".page__title")) {
+            typeTitle(node, { force: false });
+            continue;
+          }
+
+          const titles = node.querySelectorAll?.(".page__title");
+          if (titles && titles.length) {
+            titles.forEach(el => typeTitle(el, { force: false }));
+          }
+        }
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+
+  window.addEventListener("page:enter", () => {
+    initializeTypewriter(document, { force: true });
+  });
+})();
+</script>
