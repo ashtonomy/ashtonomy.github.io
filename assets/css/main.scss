@@ -47,14 +47,14 @@
 
 /* Body text → Inter */
 html, body {
-  font-family: "Cardo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family: "Google Sans Code", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
 }
 /* Headings → Fraunces */
 h1, h2, h3, h4, h5, h6,
 .page__title,     /* page titles */
 .site-title {     /* top-left site title */
-  font-family: "Cardo", Georgia, serif !important;
+  font-family: "Google Sans Code", Georgia, serif !important;
   font-optical-sizing: auto;
 }
 
@@ -67,17 +67,19 @@ h1, h2, h3, h4, h5, h6,
 .masthead .site-title,
 .masthead .site-nav,
 .masthead__menu-item {
-  font-family: "Cardo", Georgia, serif !important;
+  font-family: "Google Sans Code", Georgia, serif !important;
 }
 
 /* Sidebar: ONLY text-y bits */
 .sidebar,
-.sidebar .author__content,
+.sidebar .author__content p,
 .sidebar .author__urls-wrapper,
-.sidebar .author__urls,
+.sidebar .author__urls a,
+.sidebar .author__content,
+.sidebar .author__desktop .list-text,
 .sidebar .author__urls a,
 .sidebar .nav__items a {
-  font-family: "Cardo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family: "Google Sans Code", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif !important;
 }
 
@@ -154,3 +156,53 @@ html[data-theme="dark"] .page__inner-wrap,
 html[data-theme="dark"] .page__content {
   background: transparent;
 }
+
+
+/* ===============================
+   Typewriter effect
+   =============================== */
+
+/*
+.page__title {
+  display:inline-block;
+  width:100%;
+  white-space: nowrap; 
+  overflow: hidden; 
+  border-right: 0.45em solid #AAAAAA; 
+  animation:
+    blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #AAAAAA; }
+} */
+
+.page__title {
+  position: relative;
+  border-right: none;
+}
+
+.page__title::after {
+  content: '';
+  display: inline-block;
+  width: 0.45em;
+  height: 1em;
+  background: currentColor;
+  opacity: 0.5;
+  animation: caret-blink 1s steps(1) infinite;
+  vertical-align: bottom;
+  margin-left: 0.05em; 
+  animation: none;
+}
+
+.page__title.is-typing::after {
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+
+
